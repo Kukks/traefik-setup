@@ -1,0 +1,40 @@
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
+
+[retry]
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "nbitstack.com"
+watch = true
+exposedByDefault = false
+
+[acme]
+email = "evilkukka@gmail.com"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+[acme.httpChallenge]
+entryPoint = "http"
+
+[traefikLog]
+  filePath = "/traefik_logs/traefik.log"
+  format   = "json"
+
+[accessLog]
+  filePath = "/traefik_logs/access.log"
+  format = "json"
+
+[file]
+        filename = "servers.toml"
+
+# Enable watch file changes
+        watch = true
