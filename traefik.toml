@@ -1,6 +1,22 @@
 defaultEntryPoints = ["https","http"]
 
+[api]
+
+entryPoint = "traefik"
+dashboard = true
+
+logLevel="DEBUG"
+
+debug = true
 [entryPoints]
+	useXForwardedFor = true
+  [entryPoints.traefik]
+	address = ":8080"
+	[entryPoints.traefik.auth]
+     [entryPoints.traefik.auth.basic]
+       users = [
+         "whore:$apr1$4.AF6ym4$TdqSur7zkgBFFQQejbfup0",
+       ]
   [entryPoints.http]
   address = ":80"
     [entryPoints.http.redirect]
