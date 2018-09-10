@@ -4,10 +4,13 @@ services:
   proxy:
     container_name: traefik
     image: traefik
+    restart: always
     ports:
-    - "80:80"
-    - "8080:8080"
-    - "443:443"
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    networks:
+      - web
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.toml:/traefik.toml
@@ -18,4 +21,6 @@ services:
       
 volumes:
   traefik_logs:
-
+networks:
+  web:
+    external: true
